@@ -5,7 +5,7 @@
 Initial Farming Simulator 25 support.
 
 - Added SteamCMD install and update support for App ID `2300320` using a licensed Steam account.
-- Built against the plugin API used by Raziel7893/WindowsGSM v1.25.2.1.
+- Added support for the plugin API used by Raziel7893/WindowsGSM v1.25.2.1.
 - Added startup for the official `dedicatedServer.exe` manager.
 - Added checks for `FarmingSimulator2025Game.exe` and `dedicatedServer.xml`.
 - Added WindowsGSM Embedded Console output using Raziel's live `AllowsEmbedConsole` state.
@@ -13,4 +13,4 @@ Initial Farming Simulator 25 support.
 - Added a guarded SteamCMD update path.
 - Added `steam_appid.txt` creation for unattended server starts.
 - Disabled the broad automatic WindowsGSM firewall exception for the server manager.
-- Added setup, firewall and first-test notes.
+- Added setup and firewall notes.

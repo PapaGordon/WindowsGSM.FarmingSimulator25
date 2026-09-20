@@ -14,9 +14,10 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
 </p>
 
-This plugin installs, updates and runs the Farming Simulator 25 dedicated server with WindowsGSM. FS25 uses the normal game installation for its dedicated-server files, so WindowsGSM needs a Steam account that owns Farming Simulator 25.
+This plugin adds Farming Simulator 25 dedicated-server support to WindowsGSM. It handles installation, updates, startup and shutdown, while the actual server settings stay in the official GIANTS web panel.
 
-WindowsGSM handles the install and server-manager process. The actual game server settings stay in the official GIANTS web panel.
+FS25 uses the normal licensed Steam game files, so installation needs a Steam account that owns Farming Simulator 25.
+
 
 ## Features
 
@@ -31,7 +32,7 @@ WindowsGSM handles the install and server-manager process. The actual game serve
 - Sends CTRL+C first for a clean shutdown before using fallback methods.
 - Removes WindowsGSM's broad automatic firewall application exception for the exact `dedicatedServer.exe` path.
 - Leaves targeted manual firewall rules untouched.
-- Does not rewrite the GIANTS web-panel configuration.
+- Leaves the GIANTS web-panel configuration alone.
 
 ## Quick overview
 
@@ -53,15 +54,9 @@ WindowsGSM handles the install and server-manager process. The actual game serve
 
 ## Raziel WindowsGSM compatibility
 
-Version 0.1.0 was built directly against the plugin API used by **Raziel7893/WindowsGSM v1.25.2.1**.
+This plugin works with **Raziel7893/WindowsGSM v1.25.2.1** and uses the fork's current plugin API, including **Set Account**, Steam Guard handling and the live **Embed Console** state.
 
-The plugin uses interfaces present in the fork: `SteamCMDAgent`, `ServerConfig`, `ServerPath`, `ServerConsole.AddOutput` and the current Roslyn plugin loader. With `loginAnonymous = false`, Raziel enables its **Set Account** and Steam Guard token controls during installation.
-
-Raziel also writes the current Embedded Console state into `gameServer.AllowsEmbedConsole` immediately before calling `Start()`. The plugin reads that live value directly.
-
-The fork creates its automatic application firewall exception through `HNetCfg.FwMgr` and `AuthorizedApplications`. The plugin removes that same rule type before `dedicatedServer.exe` starts.
-
-The remaining test is the real FS25 runtime on Windows: Steam login, download, GIANTS web panel and actual game-server start.
+It also removes the broad WindowsGSM application firewall exception for `dedicatedServer.exe` before startup, while leaving your own port-specific rules alone.
 
 ## Requirements
 
@@ -115,11 +110,10 @@ This keeps Steam's launch confirmation from getting in the way of unattended ser
 
 ## Server configuration
 
-FS25 keeps its actual dedicated-server settings in the GIANTS web panel.
+FS25 keeps the actual dedicated-server settings in the GIANTS web panel.
 
-Version 0.1.0 deliberately does not rewrite `dedicatedServer.xml` or mirror WindowsGSM fields into the GIANTS configuration. This keeps the official web panel as the single source of truth.
+The plugin leaves `dedicatedServer.xml` alone, so changes made in the official panel stay there. WindowsGSM handles installation, updates and the server process; use the GIANTS web panel for the live server settings.
 
-The **Server Name**, **Map**, **Max Players** and **Port** values shown in WindowsGSM should therefore be treated as instance/default information for now.
 
 ## Ports and firewall
 
@@ -202,23 +196,6 @@ This can be intentional. For the MeFriendos setup, administer it through LAN or 
 ### WindowsGSM reports that automatic firewall access could not be disabled
 
 Run WindowsGSM as administrator. If an unrestricted `dedicatedServer.exe` application rule already exists, remove it manually and keep only the intended port-specific rules.
-
-## Testing checklist
-
-- Raziel WindowsGSM loads `FarmingSimulator25.cs` without a plugin error.
-- Install works with a Steam account that owns Farming Simulator 25.
-- Steam Guard authentication can complete when required.
-- `dedicatedServer.exe` exists after installation.
-- `x64\FarmingSimulator2025Game.exe` exists after installation.
-- `dedicatedServer.xml` is present.
-- `steam_appid.txt` contains `2300320`.
-- The server manager starts from WindowsGSM.
-- With Embed Console enabled, useful `dedicatedServer.exe` output appears in WindowsGSM.
-- The GIANTS web panel can start the actual game server.
-- Players can join through the configured multiplayer ports.
-- Stop sends CTRL+C before any forced termination.
-- No broad `dedicatedServer.exe` Windows Firewall application exception remains after startup.
-- Manual port rules remain untouched.
 
 ## Project links
 
