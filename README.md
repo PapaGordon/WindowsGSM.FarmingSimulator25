@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/Raziel7893/WindowsGSM/releases/tag/v1.25.2.1"><img src="https://img.shields.io/badge/WindowsGSM-Raziel%20v1.25.2.1-38CDD4" alt="Raziel WindowsGSM v1.25.2.1"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.1.0-80B918" alt="Version 0.1.0"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.1.1-80B918" alt="Version 0.1.1"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
 </p>
 
@@ -30,7 +30,7 @@ FS25 uses the normal licensed Steam game files, so installation needs a Steam ac
 - Supports the WindowsGSM Embedded Console using the live state Raziel passes through `AllowsEmbedConsole`.
 - Handles a missing Steam account or failed SteamCMD update cleanly.
 - Sends CTRL+C first for a clean shutdown before using fallback methods.
-- Removes WindowsGSM's broad automatic firewall application exception for the exact `dedicatedServer.exe` path.
+- Leaves firewall management to WindowsGSM's per-server **Auto Firewall** setting.
 - Leaves targeted manual firewall rules untouched.
 - Leaves the GIANTS web-panel configuration alone.
 
@@ -50,19 +50,18 @@ FS25 uses the normal licensed Steam game files, so installation needs a Steam ac
 | Query method | None in WindowsGSM |
 | Embedded Console | Supported |
 | Server configuration | GIANTS web panel |
-| Firewall | Manual port rules only |
+| Firewall | WindowsGSM Auto Firewall or manual port rules |
 
 ## Raziel WindowsGSM compatibility
 
 This plugin works with **Raziel7893/WindowsGSM v1.25.2.1** and uses the fork's current plugin API, including **Set Account**, Steam Guard handling and the live **Embed Console** state.
 
-It also removes the broad WindowsGSM application firewall exception for `dedicatedServer.exe` before startup, while leaving your own port-specific rules alone.
+Firewall management follows WindowsGSM's per-server **Auto Firewall** setting.
 
 ## Requirements
 
-- [Raziel7893/WindowsGSM v1.25.2.1](https://github.com/Raziel7893/WindowsGSM/releases/tag/v1.25.2.1) or a compatible WindowsGSM build
+- A compatible WindowsGSM build with per-server **Auto Firewall**, such as [our WindowsGSM build](https://github.com/PapaGordon/WindowsGSM)
 - 64-bit Windows
-- Administrator rights for WindowsGSM when the firewall safety check needs to remove a broad application exception
 - A Steam account with its own Farming Simulator 25 license
 
 Raziel's current WindowsGSM builds require the **.NET 8 Desktop Runtime** when moving from the original WindowsGSM build.
@@ -129,7 +128,9 @@ The plugin uses `10823` as the WindowsGSM base port and a port increment of `3` 
 
 The GIANTS web-admin port is configured in `dedicatedServer.xml`. Do not assume it is always the same on every installation.
 
-The plugin removes the unrestricted WindowsGSM application exception for the exact `dedicatedServer.exe` path before startup. It does **not** create port rules automatically.
+Firewall management follows WindowsGSM's per-server **Auto Firewall** setting. This plugin does not create, remove or inspect firewall rules and does not block startup for a plugin firewall check.
+
+Use a WindowsGSM build with **Auto Firewall**, such as our [WindowsGSM build](https://github.com/PapaGordon/WindowsGSM). For the MeFriendos setup with manual port rules, turn **Auto Firewall** off for this server in WindowsGSM and configure the required ports yourself. Router forwarding remains separate.
 
 For the MeFriendos setup:
 
@@ -192,10 +193,6 @@ Check the game port configured in the GIANTS web panel and confirm the required 
 ### The web panel is not reachable remotely
 
 This can be intentional. For the MeFriendos setup, administer it through LAN or WireGuard/VPN instead of publishing the web panel to the internet.
-
-### WindowsGSM reports that automatic firewall access could not be disabled
-
-Run WindowsGSM as administrator. If an unrestricted `dedicatedServer.exe` application rule already exists, remove it manually and keep only the intended port-specific rules.
 
 ## Project links
 

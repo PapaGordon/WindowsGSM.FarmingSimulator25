@@ -1,8 +1,7 @@
+// Made by PapaGordon
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using WindowsGSM.Functions;
@@ -17,7 +16,7 @@ namespace WindowsGSM.Plugins
             name = "WindowsGSM.FarmingSimulator25",
             author = "MeFriendos",
             description = "WindowsGSM plugin for Farming Simulator 25 Dedicated Server",
-            version = "0.1.0",
+            version = "0.1.1",
             url = "https://github.com/PapaGordon/WindowsGSM.FarmingSimulator25",
             color = "#80B918"
         };
@@ -114,12 +113,6 @@ namespace WindowsGSM.Plugins
             if (!EnsureSteamAppIdFile())
             {
                 Error = "steam_appid.txt could not be created. Check the server folder permissions.";
-                return Task.FromResult<Process>(null);
-            }
-
-            if (!RemoveAutomaticBroadFirewallRule())
-            {
-                Error = "Automatic firewall access could not be disabled. Start WindowsGSM as administrator or remove the broad dedicatedServer.exe rule manually.";
                 return Task.FromResult<Process>(null);
             }
 
@@ -236,70 +229,6 @@ namespace WindowsGSM.Plugins
                     return true;
 
                 File.WriteAllText(path, expected + Environment.NewLine);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool RemoveAutomaticBroadFirewallRule()
-        {
-            string programPath = ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
-
-            try
-            {
-                Type managerType = Type.GetTypeFromProgID("HNetCfg.FwMgr");
-                if (managerType == null)
-                    return false;
-
-                object manager = Activator.CreateInstance(managerType);
-                object localPolicy = manager.GetType().InvokeMember(
-                    "LocalPolicy", BindingFlags.GetProperty, null, manager, null);
-                object currentProfile = localPolicy.GetType().InvokeMember(
-                    "CurrentProfile", BindingFlags.GetProperty, null, localPolicy, null);
-                object applications = currentProfile.GetType().InvokeMember(
-                    "AuthorizedApplications", BindingFlags.GetProperty, null, currentProfile, null);
-
-                IEnumerable entries = applications as IEnumerable;
-                if (entries == null)
-                    return false;
-
-                bool found = false;
-                foreach (object application in entries)
-                {
-                    string applicationPath = Convert.ToString(application.GetType().InvokeMember(
-                        "ProcessImageFileName", BindingFlags.GetProperty, null, application, null));
-
-                    if (string.Equals(applicationPath, programPath, StringComparison.OrdinalIgnoreCase))
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found)
-                    return true;
-
-                applications.GetType().InvokeMember(
-                    "Remove", BindingFlags.InvokeMethod, null, applications, new object[] { programPath });
-
-                applications = currentProfile.GetType().InvokeMember(
-                    "AuthorizedApplications", BindingFlags.GetProperty, null, currentProfile, null);
-                entries = applications as IEnumerable;
-                if (entries == null)
-                    return false;
-
-                foreach (object application in entries)
-                {
-                    string applicationPath = Convert.ToString(application.GetType().InvokeMember(
-                        "ProcessImageFileName", BindingFlags.GetProperty, null, application, null));
-
-                    if (string.Equals(applicationPath, programPath, StringComparison.OrdinalIgnoreCase))
-                        return false;
-                }
-
                 return true;
             }
             catch
