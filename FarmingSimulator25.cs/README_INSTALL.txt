@@ -1,7 +1,9 @@
 Farming Simulator 25 - WindowsGSM plugin
 
 Recommended WindowsGSM build:
-A compatible build with per-server Auto Firewall, such as https://github.com/PapaGordon/WindowsGSM.
+MeFriendos WindowsGSM v1.25.3.0 with per-server Auto Firewall.
+https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0
+The Windows x64 download includes the .NET runtime.
 
 1. Copy the complete FarmingSimulator25.cs folder into WindowsGSM\plugins.
 2. Reload plugins or restart WindowsGSM.
@@ -16,7 +18,8 @@ FS25 uses the normal licensed game installation and cannot be installed with ano
 Firewall management follows WindowsGSM's per-server Auto Firewall setting.
 The plugin does not create, remove or inspect firewall rules and does not block startup for a plugin firewall check.
 
-Use a WindowsGSM build with Auto Firewall, such as https://github.com/PapaGordon/WindowsGSM.
+Use MeFriendos WindowsGSM v1.25.3.0 with Auto Firewall:
+https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0
 For manual port rules, turn Auto Firewall off for this server in WindowsGSM and configure the required ports yourself. Router forwarding remains separate.
 
 Keep the admin web panel private and create only the game-port rules you need.

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Raziel7893/WindowsGSM/releases/tag/v1.25.2.1"><img src="https://img.shields.io/badge/WindowsGSM-Raziel%20v1.25.2.1-38CDD4" alt="Raziel WindowsGSM v1.25.2.1"></a>
+  <a href="https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0"><img src="https://img.shields.io/badge/WindowsGSM-MeFriendos%20v1.25.3.0-38CDD4" alt="MeFriendos WindowsGSM v1.25.3.0"></a>
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.1.1-80B918" alt="Version 0.1.1"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
 </p>
@@ -27,7 +27,7 @@ FS25 uses the normal licensed Steam game files, so installation needs a Steam ac
 - Starts the official `dedicatedServer.exe` server manager.
 - Checks that `x64\FarmingSimulator2025Game.exe` and `dedicatedServer.xml` exist before startup.
 - Creates `steam_appid.txt` with the correct App ID when needed.
-- Supports the WindowsGSM Embedded Console using the live state Raziel passes through `AllowsEmbedConsole`.
+- Supports the WindowsGSM Embedded Console using the live state WindowsGSM passes through `AllowsEmbedConsole`.
 - Handles a missing Steam account or failed SteamCMD update cleanly.
 - Sends CTRL+C first for a clean shutdown before using fallback methods.
 - Leaves firewall management to WindowsGSM's per-server **Auto Firewall** setting.
@@ -52,19 +52,19 @@ FS25 uses the normal licensed Steam game files, so installation needs a Steam ac
 | Server configuration | GIANTS web panel |
 | Firewall | WindowsGSM Auto Firewall or manual port rules |
 
-## Raziel WindowsGSM compatibility
+## WindowsGSM compatibility
 
-This plugin works with **Raziel7893/WindowsGSM v1.25.2.1** and uses the fork's current plugin API, including **Set Account**, Steam Guard handling and the live **Embed Console** state.
+This plugin uses the API in **MeFriendos WindowsGSM v1.25.3.0**, including **Set Account**, Steam Guard handling and the live **Embed Console** state.
 
 Firewall management follows WindowsGSM's per-server **Auto Firewall** setting.
 
 ## Requirements
 
-- A compatible WindowsGSM build with per-server **Auto Firewall**, such as [our WindowsGSM build](https://github.com/PapaGordon/WindowsGSM)
+MeFriendos uses this plugin with [WindowsGSM v1.25.3.0](https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0). The Windows x64 download includes the .NET runtime.
+
+- [MeFriendos WindowsGSM v1.25.3.0](https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0) with per-server **Auto Firewall**
 - 64-bit Windows
 - A Steam account with its own Farming Simulator 25 license
-
-Raziel's current WindowsGSM builds require the **.NET 8 Desktop Runtime** when moving from the original WindowsGSM build.
 
 The dedicated server uses the normal FS25 game installation. If another machine should play at the same time, use a separate Steam account/license for the server.
 
@@ -130,7 +130,7 @@ The GIANTS web-admin port is configured in `dedicatedServer.xml`. Do not assume 
 
 Firewall management follows WindowsGSM's per-server **Auto Firewall** setting. This plugin does not create, remove or inspect firewall rules and does not block startup for a plugin firewall check.
 
-Use a WindowsGSM build with **Auto Firewall**, such as our [WindowsGSM build](https://github.com/PapaGordon/WindowsGSM). For the MeFriendos setup with manual port rules, turn **Auto Firewall** off for this server in WindowsGSM and configure the required ports yourself. Router forwarding remains separate.
+Use [MeFriendos WindowsGSM v1.25.3.0](https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0) with **Auto Firewall**. For the MeFriendos setup with manual port rules, turn **Auto Firewall** off for this server in WindowsGSM and configure the required ports yourself. Router forwarding remains separate.
 
 For the MeFriendos setup:
 
@@ -197,8 +197,8 @@ This can be intentional. For the MeFriendos setup, administer it through LAN or 
 ## Project links
 
 - Source: [PapaGordon/WindowsGSM.FarmingSimulator25](https://github.com/PapaGordon/WindowsGSM.FarmingSimulator25)
-- WindowsGSM: [Raziel7893/WindowsGSM](https://github.com/Raziel7893/WindowsGSM)
-- Current WindowsGSM release: [v1.25.2.1](https://github.com/Raziel7893/WindowsGSM/releases/tag/v1.25.2.1)
+- WindowsGSM: [PapaGordon/WindowsGSM](https://github.com/PapaGordon/WindowsGSM)
+- Current WindowsGSM release: [v1.25.3.0](https://github.com/PapaGordon/WindowsGSM/releases/tag/v1.25.3.0)
 - Farming Simulator: [farming-simulator.com](https://www.farming-simulator.com/)
 - Community: [mefriendos.de](https://mefriendos.de)
 
