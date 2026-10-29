@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-10-29
+
+
+- Refreshes the README links, current WindowsGSM guidance and Steam credential compatibility notes.
+- Uses the current canonical repository URL. Server runtime behavior is unchanged.
+
+
 ## 0.1.1 - 2026-10-22
 
 - Removed plugin firewall cleanup and its startup block. Firewall management now follows WindowsGSM's per-server Auto Firewall setting.
